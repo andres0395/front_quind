@@ -22,3 +22,5 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 # Revisar el archivo package.json 
 
 # para instalar las dependencias escriba en la consola de comandos: npm install
+
+# el sotrageService es el encargado de manejar los estados de la aplicacion

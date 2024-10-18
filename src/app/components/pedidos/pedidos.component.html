@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h6 class="text-3xl mb-5">
+      Nuevo Pedido
+    </h6>
+    <!-- <form [formGroup]="formPedidos" class="gap-5 md:flex" (submit)="savePedido()">
+      <div class="mb-5 md:col-span-3 ">
+        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+        <input type="text" formControlName="nombre" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Acetaminofen" />
+        @if (formPedidos.get('nombre')?.invalid && formPedidos.get('nombre')?.touched) {
+          <span class="text-red-500">El nombre es obligatorio.</span>
+        }
+      </div>
+      <div class="mb-5 md:col-span-3">
+        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gramaje</label>
+        <input type="text" formControlName="gramaje" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="43mg" />
+        @if (formPedidos.get('gramaje')?.invalid && formPedidos.get('gramaje')?.touched) {
+          <span class="text-red-500">El gramaje es obligatorio.</span>
+        }
+      </div>
+      <div class="mb-5 md:col-span-3">
+        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad</label>
+        <input type="text" formControlName="existencia" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="12" />
+        @if (formPedidos.get('existencia')?.invalid && formPedidos.get('existencia')?.touched) {
+          <span class="text-red-500">Debe ingresar numeros mayor o igual a 1.</span>
+        }
+      </div>
+      <div class="md:col-span-3">
+        <button type="submit" class="md:mt-7 md:w-24 w-full  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Guardar</button>
+      </div>
+    </form> -->
+  </div>
+
+
+  <div class="relative overflow-x-auto mt-8">
+    <h6 class="text-3xl mb-5">
+      Listado de Medicamentos
+    </h6>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr class="text-center">
+                <th scope="col" class="px-6 py-3">
+                    Solicitante
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Medicamento
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Cantidad
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  estado
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  recibido
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(pedidos().length){
+              @for (item of pedidos(); track $index) {
+                <tr class="text-center">
+                  <th scope="col" class="px-6 py-3">
+                      {{item.solicitante}}
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      {{item.medicamento?.nombre}}
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      {{item.cantidad}}
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    {{item.estado}}
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-center items-center flex justify-center">
+                    @if(item.estado == 'Solicitado'){
+                      <div class="flex justify-center ">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"></label>
+                      </div>
+                    }
+                    @else {
+                      <svg class="w-6 h-6 text-green-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+                      </svg>
+                    }
+                  </th>
+                </tr>
+              }
+            }
+            @else {
+              <tr class="text-center">
+                <th scope="col" colspan="3" class="px-6 py-3">
+                    No hay registros
+                </th>
+            </tr>
+            }
+        </tbody>
+    </table>
+  </div>
+
+</div>
