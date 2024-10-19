@@ -26,3 +26,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 # el sotrageService es el encargado de manejar los estados de la aplicacion
 
 ### cuando este probando el programa lo primero que debe hacer es ingresar los medicamentos para alimentar el sistema
+
+
+###                  IMPORTANTE NO INICIAR EL PROGRAMA SIN ANTES INICIAR EL BACKEND                            ###

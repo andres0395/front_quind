@@ -35,6 +35,21 @@
   <h6 class="text-3xl mb-5 mt-8">
     Listado de Medicamentos
   </h6>
+  <div class="flex gap-4 mb-5">
+    <div>
+      <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Busca por Nombre</label>
+        <input type="text" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Acetaminofen" (input)="searchDataMedicamentos($event.target)" />
+    </div>
+    <div>
+      <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ordenar Por:</label>
+      <select id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer" (change)="filterDataMedicamentos($event.target)">
+        <option value="" disabled selected>Seleccione...</option>
+        <option value="Nombre">Nombre</option>
+        <option value="mas">Mas Existencia</option>
+        <option value="menos">Menos Existencia</option>
+      </select>
+    </div>
+  </div>
   <div class="relative overflow-x-auto ">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -51,8 +66,8 @@
             </tr>
         </thead>
         <tbody>
-            @if(medicamentos().length){
-              @for (item of medicamentos(); track $index) {
+            @if(filterMedicamentos.length){
+              @for (item of filterMedicamentos; track $index) {
                 <tr class="text-center">
                   <th scope="col" class="px-6 py-3">
                       {{item.nombre}}

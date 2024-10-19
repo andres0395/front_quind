@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
+import { Component, effect, inject, Injector, OnInit, Signal } from '@angular/core';
 import { StorageService } from '../../services/storage.service';
 import { Medicamentos } from '../../interfaces/medicamentos.interface';
 import {ReactiveFormsModule,FormBuilder,Validators} from '@angular/forms';
@@ -16,8 +16,10 @@ export default class MedicamentosComponent implements OnInit  {
 
   private storage = inject(StorageService);
   medicamentos!:Signal<Medicamentos[]>;
+  filterMedicamentos:Medicamentos[] = [];
   private formBuilder = inject(FormBuilder);
   private servidor = inject(ServidorService);
+  private injector = inject(Injector);
   formMedicamentos = this.formBuilder.nonNullable.group({
     nombre:['',Validators.required],
     gramaje:['',Validators.required],
@@ -26,6 +28,28 @@ export default class MedicamentosComponent implements OnInit  {
 
   ngOnInit(): void {
     this.medicamentos = this.storage.medicamentosSignal;
+    effect(()=>{
+      if(this.medicamentos().length){
+        this.filterMedicamentos = this.medicamentos();
+        console.log(this.medicamentos());
+      }
+    },{injector:this.injector});
+  }
+
+  filterDataMedicamentos(val:any) {
+    if(val.value=='Nombre'){
+      this.filterMedicamentos.sort((a, b) => a.nombre.toUpperCase().localeCompare(b.nombre.toUpperCase()));
+    }
+    else if(val.value=='mas'){
+      this.filterMedicamentos.sort((a,b)=>b.existencia - a.existencia);
+    }
+    else if(val.value=='menos'){
+      this.filterMedicamentos.sort((a,b)=>a.existencia - b.existencia);
+    }
+  }
+
+  searchDataMedicamentos(val:any){
+    this.filterMedicamentos = this.medicamentos().filter(e=>e.nombre.toUpperCase().includes(val.value.toUpperCase()));
   }
 
   saveMedicamento() {
