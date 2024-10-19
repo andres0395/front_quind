@@ -47,11 +47,11 @@ export class ServidorService {
     return this.http.post(this.url+'pedidos/',data);
   }
 
-  updatePedido(data:Pedidos,id:number){
-    return this.http.put(this.url+`pedidos/${id}/recibido`,data);
+  updatePedido(data:Pedidos){
+    return this.http.put(this.url+`pedidos/${data.id}/recibido/${data.medicamento?.id}`,data);
   }
 
-  updateFormula(data:Formulas,id:number){
-    return this.http.put(this.url+`formulas/${id}/estado`,data);
+  updateFormula(obj:any,id:any){
+    return this.http.put(this.url+`formulas/${id}/estado`,obj);
   }
 }
