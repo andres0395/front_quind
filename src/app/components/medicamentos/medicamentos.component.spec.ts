@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MedicamentosComponent } from './medicamentos.component';
+import  MedicamentosComponent  from './medicamentos.component';
 
 describe('MedicamentosComponent', () => {
   let component: MedicamentosComponent;
@@ -16,7 +16,6 @@ describe('MedicamentosComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
